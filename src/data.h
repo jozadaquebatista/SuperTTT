@@ -36,13 +36,23 @@
 
 #define and &&
 
-#define write_screen(str)(puts(str))
+#define write_screen(str){\
+\
+  int i, c;\
+  for(i=0; i<strlen(str); i++)\
+  {\
+    for(c=0; c<1999999; c++);\
+    putchar(str[i]);\
+  }\
+  puts("");\
+}
+                    
 #define draw(ptr,x,y)(printf("    [%c]", ptr[y][x]))
 #define line_break (puts("\n\n"))
 
 // 0 1
-extern const unsigned char *first_player_n;
-extern const unsigned char *second_player_n;
+extern const char *first_player_n;
+extern const char *second_player_n;
 
 extern unsigned int turn, moves;
 
@@ -52,7 +62,7 @@ extern unsigned char table[3][3];
 extern void draw_table( void );
 
 // If someone wins, then print the winner and return 0
-extern _Bool check_winner( void ); // unsigned int *foo
+extern int check_winner( void ); // unsigned int *foo
 
 extern int player_turn( int );
 

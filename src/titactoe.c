@@ -47,20 +47,25 @@ int main( int argc, char **argv)
     *   wins.
     *
      */
-    if(moves >= 3)
+    if(moves >= 4)
     {
       system("tput reset"); draw_table();
     
       if(check_winner() == 0)
       {
+        //system("tput reset");
+        draw_table();
         puts("The computer Wins!\n**********GAME OVER************");
+
         return 1;
-      }
+      } else continue;
+      
       if(check_winner() == 1)
       {
+        system("tput reset");draw_table();
         puts("Congratulations you win!\n**********GAME OVER************");
         return 1;
-      }
+      } else continue;
     } system("tput reset");
   }
   

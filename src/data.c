@@ -1,7 +1,7 @@
 #include "data.h"
 
-//volatile unsigned char *first_player_n = calloc(9, sizeof(char));
-//volatile unsigned char *second_player_n = calloc(9, sizeof(char));
+//char *first_player_n  = calloc(9, sizeof(char));
+//char *second_player_n = calloc(9, sizeof(char));
 
 /* Board
 
@@ -44,7 +44,7 @@ void draw_table( void )
 
 }
 
-_Bool check_winner(  ) // unsigned int *foo
+int check_winner(  ) // unsigned int *foo
 {
 
   if( (table[0][0] == 'O' and table[1][0] == 'O' and table[2][0] == 'O') ||
@@ -73,6 +73,8 @@ _Bool check_winner(  ) // unsigned int *foo
     )
       return false;
 
+    return 2;
+      
 }
 
 
@@ -102,14 +104,15 @@ int player_turn( int player )
       
       do {
         
-        write_screen("This position is already checked, please choose another.");
+        write_screen("*This position is already checked, please choose another.");
         scanf("%d %d", &x, &y);
         
-        if(table[y][x] != 'O' || table[y][x] != 'X')
+        if(table[y][x] != 'O' && table[y][x] != 'X')
         {
           table[y][x] = 'O';
           return false;
         }
+        
       } while(true);
       
     } else { table[y][x] = 'O'; }
@@ -132,15 +135,11 @@ void AI( void )
   for( y; y<(strlen(*table)/3); y++ )
   {
     for( x; x<(strlen(*table)/3); x++ )
-    {
-      volatile unsigned int c = 0;
-      for(c=0;c<190000000; c++);
-    
+    {    
       if( table[y][x] != 'O' && table[y][x] != 'X' )
       {
         table[y][x] = 'X';
-        //system("tput reset");
-        draw_table();
+        system("tput reset");draw_table();
         printf("Computer plays in : %d %d\n", x, y);
         return;
       }
