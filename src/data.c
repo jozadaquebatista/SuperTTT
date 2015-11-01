@@ -3,12 +3,23 @@
 //volatile unsigned char *first_player_n = calloc(9, sizeof(char));
 //volatile unsigned char *second_player_n = calloc(9, sizeof(char));
 
-// Board
+/* Board
+
+    [_]    [_]    [_]
+
+
+    [_]    [_]    [_]
+
+
+    [_]    [_]    [_]
+*/
 unsigned char table[3][3] = {{'_','_','_'},
                              {'_','_','_'},
                              {'_','_','_'}};
 
-
+// End of board definition
+                             
+                             
 unsigned int turn=0, moves=0;
                      
                      
@@ -75,7 +86,7 @@ int player_turn( int player )
   {
     write_screen("Computer will start playing");
     AI();
-    
+    moves++;
     player = 1;
   }
   
@@ -86,7 +97,23 @@ int player_turn( int player )
     puts("Insert the cordinates like this: x y");
     scanf("%d %d", &x, &y);
     
-    table[y][x] = 'O';
+    if(table[y][x] == 'O' || table[y][x] == 'X') 
+    {
+      
+      do {
+        
+        write_screen("This position is already checked, please choose another.");
+        scanf("%d %d", &x, &y);
+        
+        if(table[y][x] != 'O' || table[y][x] != 'X')
+        {
+          table[y][x] = 'O';
+          return false;
+        }
+      } while(true);
+      
+    } else { table[y][x] = 'O'; }
+    
     moves++;
     
     player = 0;
