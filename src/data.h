@@ -34,6 +34,8 @@
   #define false 0
 #endif
 
+#define and &&
+
 #define write_screen(str)(puts(str))
 #define draw(ptr,x,y)(printf("    [%c]", ptr[y][x]))
 #define line_break (puts("\n\n"))
@@ -50,12 +52,12 @@ extern unsigned char table[3][3];
 extern void draw_table( void );
 
 // If someone wins, then print the winner and return 0
-extern _Bool check_winner(  ); // unsigned int *foo
+extern _Bool check_winner( void ); // unsigned int *foo
 
-extern void player_turn( int );
+extern int player_turn( int );
 
 extern void AI( void );
 
-extern unsigned int random_number();
+extern unsigned int random_number( void );
 
 #endif

@@ -23,8 +23,9 @@ int main( int argc, char **argv)
   #endif
   
   
-  while(1)
+  while(true)
   {
+    
     write_screen("\n==[ Welcome to the SUPER TIC-TAC-TOE 2015/2016 ]============");
     
     draw_table();
@@ -32,15 +33,20 @@ int main( int argc, char **argv)
     if(player == 1)
     {
       player_turn(player);
-      player = 0;
     }
     
     if(player == 0)
     {
       player_turn(player);
-      player = 1;
     }
     
+    /*
+    *
+    *   Only will check if the number of moves >= 3
+    *   This prevent waste of time checkin if someone
+    *   wins.
+    *
+     */
     if(moves >= 3)
     {
       system("tput reset"); draw_table();
